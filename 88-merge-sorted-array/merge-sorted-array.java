@@ -1,24 +1,28 @@
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int valofnums2 = 0;
-        for (int i = m; i < nums1.length; i++) {
-            if (nums1[i] == 0) {
-                nums1[i] = nums2[valofnums2++];
+        int i = 0, pointer1 = 0, pointer2 = 0;
+
+        int[] result = new int[m + n];
+
+        while (pointer1 < m && pointer2 < n) {
+
+            if (nums1[pointer1] > nums2[pointer2]) {
+                result[i++] = nums2[pointer2++];
+            } else {
+                result[i++] = nums1[pointer1++];
             }
         }
 
-        Arrays.sort(nums1);
-        // int left = 0, right = nums1.length - 1;
+        while (pointer1 < m) {
+            result[i++] = nums1[pointer1++];
+        }
 
-        // while (left < right) {
-        //     if (nums1[left] > nums1[right]) {
-        //         int temp = nums1[left];
-        //         nums1[left] = nums1[right];
-        //         nums1[right] = temp;
-        //     }
+        while (pointer2 < n) {
+            result[i++] = nums2[pointer2++];
+        }
 
-        //     left++;
-        //     right--;
-        // }
+        for (int j = 0; j < result.length; j++) {
+            nums1[j] = result[j];
+        }
     }
 }
