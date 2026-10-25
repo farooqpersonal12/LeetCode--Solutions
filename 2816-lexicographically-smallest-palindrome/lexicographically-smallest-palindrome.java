@@ -1,32 +1,9 @@
 class Solution {
     public String makeSmallestPalindrome(String s) {
-        if (s.length() < 1) {
-            return null;
-        }
-
-        char[] sb = s.toCharArray();
-        int left = 0, right = sb.length - 1;
-        while (left < right) {
-
-            if (sb[left] == sb[right]) {
-                left++;
-                right--;
-            } else {
-                char lc = sb[left];
-                char rc = sb[right];
-
-                if (lc < rc) {
-                    sb[right] = sb[left];
-                    left++;
-                    right--;
-                }else{
-                    sb[left] = sb[right];
-                    left++;
-                    right--;
-                }
-            }
-        }
-
-        return new String(sb);
+        int n = s.length();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++)
+            sb.append(Character.toString(Math.min(s.charAt(i), s.charAt(n - i - 1))));
+        return sb.toString();
     }
 }
